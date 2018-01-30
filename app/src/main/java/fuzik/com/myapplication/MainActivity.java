@@ -10,8 +10,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //ello
-        //假装自己在主干开发
+        //假装自己在主干git 开发
         //假装自己在修改bug
+        //假装做了很多事情哦，，，，
 
     }
 }
