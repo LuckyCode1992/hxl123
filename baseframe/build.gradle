@@ -5,7 +5,7 @@ android {
     buildToolsVersion '26.0.2'
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 25
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -57,7 +57,7 @@ dependencies {
     compile 'com.jude:rollviewpager:1.4.6'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.zhy:okhttputils:2.6.2'
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.alibaba:fastjson:1.2.40'
     compile 'com.github.florent37:viewanimator:1.0.5'
     //bugly框架
     compile 'com.tencent.bugly:crashreport:latest.release'

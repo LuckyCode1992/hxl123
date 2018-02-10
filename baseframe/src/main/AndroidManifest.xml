@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
-        android:name="com.sprout.frame.baseframe.base.App"
+        android:name=".base.App"
         android:allowBackup="true"
         android:supportsRtl="true">
     </application>
