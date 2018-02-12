@@ -4,11 +4,9 @@ package com.sprout.frame.baseframe.sp;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.alibaba.fastjson.JSON;
 import com.sprout.frame.baseframe.base.App;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,9 +69,10 @@ public class BaseSP {
     public void setList(String tag, List<String> datalist) {
         if (null == datalist) return;
         //转换成json数据，再保存
-        String strJson = new Gson().toJson(datalist);
+        String strJson = JSON.toJSONString(datalist);
         editor.putString(tag, strJson);
         editor.commit();
+
     }
 
     /**
@@ -83,9 +82,7 @@ public class BaseSP {
         List<String> datalist = new ArrayList<>();
         String strJson = pref.getString(tag, null);
         if (null == strJson) return datalist;
-        Type type = new TypeToken<List<String>>() {
-        }.getType();
-        datalist = new Gson().fromJson(strJson, type);
+        datalist = JSON.parseArray(strJson, String.class);
         return datalist;
     }
 

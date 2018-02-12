@@ -2,10 +2,8 @@ package com.sprout.frame.baseframe.http;
 
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.alibaba.fastjson.JSON;
 import com.sprout.frame.baseframe.dataModel.Customer;
-import com.sprout.frame.baseframe.http.typeAdapterFactory.NullStringTypeAdapterFactory;
 import com.sprout.frame.baseframe.utils.AndroidUtil;
 import com.sprout.frame.baseframe.utils.LogUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -40,7 +38,6 @@ public abstract class HttpAction<E> extends LongAction<E, String> {
 
     private Map<String, String> map = new HashMap<>();
     private Map<String, File> fileMap = new HashMap<>();
-    private Gson gson;
     private String tag;
     private int connTimeout = 0;
     private int readTimeout = 0;
@@ -159,7 +156,7 @@ public abstract class HttpAction<E> extends LongAction<E, String> {
                 builder.addFile(entry.getKey(), entry.getValue().getName(), entry.getValue());
             }
         }
-        LogUtil.debug("请求", url.concat("\n").concat(new Gson().toJson(tempMap)));
+        LogUtil.debug("请求", url.concat("\n").concat(JSON.toJSONString(tempMap)));
 
         if (!TextUtils.isEmpty(tag)) builder.tag(tag);
         RequestCall requestCall = builder.build();
@@ -205,10 +202,10 @@ public abstract class HttpAction<E> extends LongAction<E, String> {
         //默认解析公共的数据
         JSONObject resultObject = new JSONObject(response).getJSONObject("result");
         result.setResultCode(resultObject.getInt("resultCode"));
-        result.setResultMessage(resultObject.getString("resultMessage"));
+        if (resultObject.has("resultMessage"))
+            result.setResultMessage(resultObject.getString("resultMessage"));
         //解析非公共的数据
-        if (gson == null) gson = new GsonBuilder().registerTypeAdapterFactory(new NullStringTypeAdapterFactory()).create();
-        E e = decodeModel(response, result, gson);
+        E e = decodeModel(response, result);
         result.setEntity(e);
         return e;
     }
@@ -216,7 +213,7 @@ public abstract class HttpAction<E> extends LongAction<E, String> {
     /**
      * 解析特有响应
      */
-    public E decodeModel(String response, HttpResult<E> result, Gson gson) throws JSONException {
+    public E decodeModel(String response, HttpResult<E> result) throws JSONException {
         return null;
     }
 }
