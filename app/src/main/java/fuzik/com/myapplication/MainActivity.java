@@ -1,6 +1,7 @@
 package fuzik.com.myapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -51,6 +52,7 @@ public class MainActivity extends UIBaseActivity {
         //   加解密 密钥
         key = "LD-FZ-1707200004";
         content = "1234567890123456";
+        tvJiamiHou.setText("测试");
         bleSDK = SRBleSDK.with(this)
                 .onConnect(new Action0() {
                     @Override
@@ -102,7 +104,7 @@ public class MainActivity extends UIBaseActivity {
                 });
     }
 
-    @OnClick({R.id.btn_connect, R.id.btn_send})
+    @OnClick({R.id.btn_connect, R.id.btn_send,R.id.btn_lottie})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_connect:
@@ -111,6 +113,12 @@ public class MainActivity extends UIBaseActivity {
             case R.id.btn_send:
 //                bleSDK.
                 break;
+            case R.id.btn_lottie:
+                Log.d("点击测试", "lottie");
+                startActivity(new Intent(MainActivity.this,LottieActivity.class));
+                break;
         }
     }
+
+
 }

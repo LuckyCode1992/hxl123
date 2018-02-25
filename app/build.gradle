@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -29,4 +30,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(path: ':baseframe')
     compile project(path: ':blesdk1.0')
+    //lottie框架
+    compile 'com.airbnb.android:lottie:2.1.0'
+    compile 'com.jakewharton:butterknife:8.3.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.3.0'
 }
