@@ -3,6 +3,7 @@ package com.mysirui.vehicle;
 import android.content.Context;
 
 import com.mysirui.vehicle.dataModel.BleData;
+import com.mysirui.vehicle.framework.BLEStringChannel;
 import com.mysirui.vehicle.framework.ChannelConnectionManager;
 import com.mysirui.vehicle.framework.ChannelEventListenerContainer;
 import com.mysirui.vehicle.framework.ChannelListener;
@@ -32,7 +33,9 @@ public class SRBleClient {
 
     int vehicleID;
     BleRawClient<BleData> rawClient;
+    BleRawClient<String> rawClient2;
     BLEChannel msgChannel;
+    BLEStringChannel msgChannel2;
     ChannelEventListenerContainer<BleData> container;
     StatusManager statusManager;
 
@@ -44,6 +47,9 @@ public class SRBleClient {
 
         //连接管理
         container.add(new ChannelConnectionManager(rawClient, coder));
+
+        //发送字符串消息
+        msgChannel2 = new BLEStringChannel(rawClient2);
 
         //消息交互
         msgChannel = new BLEChannel(rawClient, coder);
@@ -195,11 +201,18 @@ public class SRBleClient {
     /**
      * 发送消息
      *
-     * @param msg     发送的消息, 默认超时时间5秒
+     * @param msg 发送的消息, 默认超时时间5秒
      * @return
      */
     public Observable<MsgResult<BleData>> sendMsg(BleData msg) {
         return msgChannel.sendMsg(msg, 5000);
+    }
+
+    /**
+     * 发送string 消息
+     */
+    public void sendMsg(String msg) {
+        msgChannel2.sendMsg(msg);
     }
 
     /**

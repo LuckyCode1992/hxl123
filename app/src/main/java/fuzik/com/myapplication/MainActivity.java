@@ -13,9 +13,16 @@ import android.widget.TextView;
 import com.mysirui.vehicle.SRBleSDK;
 import com.sprout.frame.baseframe.utils.coder.AES;
 
+import org.bouncycastle.util.encoders.Hex;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends UIBaseActivity {
 
@@ -44,25 +51,32 @@ public class MainActivity extends UIBaseActivity {
         aes = new AES();
         //   加解密 密钥
         key = "LD-FZ-1707200004";
-        content = "1234567890123456";
+        content = "123";
+        etJiamiQian.setText(content);
         tvJiamiHou.setText("测试");
         bleSDK = SRBleSDK.with(this)
                 .onConnect(new Action0() {
                     @Override
                     public void call() {
-
+                        tvBle.setText("连接");
                     }
                 })
                 .onLogin(new Action0() {
                     @Override
                     public void call() {
-
+                        tvBle.setText("登陆");
                     }
                 })
                 .onDisconn(new Action0() {
                     @Override
                     public void call() {
-
+                        tvBle.setText("未连接");
+                    }
+                })
+                .onMessage(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        tvJiesou.setText(s);
                     }
                 });
 
@@ -97,18 +111,45 @@ public class MainActivity extends UIBaseActivity {
 //                });
     }
 
-    @OnClick({R.id.btn_connect, R.id.btn_send,R.id.btn_lottie})
+    @OnClick({R.id.btn_connect, R.id.btn_send, R.id.btn_lottie})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_connect:
-                bleSDK.start("TDCM-LDFZ","","");
+                bleSDK.start("TDCM-LDFZ", "", "");
                 break;
             case R.id.btn_send:
-//                bleSDK.
+                bleSDK.sendMsg(content);
+                Observable.create(new Observable.OnSubscribe<Object>() {
+                    @Override
+                    public void call(Subscriber<? super Object> subscriber) {
+
+                    }
+                }).subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Object>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(Object o) {
+
+                            }
+                        });
+                byte[] enc = aes.encrypt(content.getBytes(), key.getBytes());
+                Log.d("--------", "加密后的内容：" + new String(Hex.encode(enc)));
+                aes.iv1 = new String(Hex.encode(enc));
+
                 break;
             case R.id.btn_lottie:
                 Log.d("点击测试", "lottie");
-                startActivity(new Intent(MainActivity.this,LottieActivity.class));
+                startActivity(new Intent(MainActivity.this, LottieActivity.class));
                 break;
         }
     }

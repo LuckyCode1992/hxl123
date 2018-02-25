@@ -22,6 +22,7 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.functions.Action0;
+import rx.functions.Action1;
 
 /**
  * 蓝牙SDK调用封装
@@ -120,9 +121,22 @@ public class SRBleSDK {
 
         @Override
         public void onReceive(Object receiveiMsg) {
-
+            if (receiveiMsg != null) {
+                String msg = receiveiMsg.toString();
+                actionMsg.call(msg);
+            }
         }
     };
+
+    private Action1<String> actionMsg;
+
+    /**
+     * 蓝牙数据返回字符串
+     */
+    public SRBleSDK onMessage(Action1<String> action1) {
+        actionMsg = action1;
+        return this;
+    }
 
     /**
      * 蓝牙关联的SDK
@@ -444,6 +458,11 @@ public class SRBleSDK {
      */
     public SRBleSDK setMode(int mode) {
         ScanUtil.setMode(mode);
+        return this;
+    }
+
+    public SRBleSDK sendMsg(String msg){
+        client.sendMsg(msg);
         return this;
     }
 }
