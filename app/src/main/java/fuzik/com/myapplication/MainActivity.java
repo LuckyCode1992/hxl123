@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends UIBaseActivity {
@@ -50,26 +51,26 @@ public class MainActivity extends UIBaseActivity {
         //   加解密 密钥
         key = "LD-FZ-1707200004";
         content = "1234567890123456";
-//        bleSDK
-//                .onConnect(new Action0() {
-//                    @Override
-//                    public void call() {
-//
-//                    }
-//                })
-//                .onLogin(new Action0() {
-//                    @Override
-//                    public void call() {
-//
-//                    }
-//                })
-//                .onDisconn(new Action0() {
-//                    @Override
-//                    public void call() {
-//
-//                    }
-//                })
-//                .start()
+        bleSDK = SRBleSDK.with(this)
+                .onConnect(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                .onLogin(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                .onDisconn(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                });
+
         Observable.interval(3, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.newThread())
@@ -105,8 +106,10 @@ public class MainActivity extends UIBaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_connect:
+//                bleSDK.start()
                 break;
             case R.id.btn_send:
+//                bleSDK.
                 break;
         }
     }
