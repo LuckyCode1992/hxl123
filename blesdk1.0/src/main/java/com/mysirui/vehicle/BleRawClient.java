@@ -9,20 +9,19 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.os.Handler;
 
-
+import com.mysirui.vehicle.constants.BleErrorEnum;
+import com.mysirui.vehicle.constants.SRGattAttributes;
 import com.mysirui.vehicle.framework.AsyncBleIdleWork;
 import com.mysirui.vehicle.framework.AsyncBleWork;
 import com.mysirui.vehicle.framework.BleAsyncWork;
-import com.mysirui.vehicle.framework.IBleMsgCoder;
-import com.mysirui.vehicle.util.EnvUtil;
-import com.mysirui.vehicle.constants.BleErrorEnum;
-import com.mysirui.vehicle.constants.SRGattAttributes;
-import com.mysirui.vehicle.util.BleUtil;
-import com.mysirui.vehicle.util.ScanUtil;
 import com.mysirui.vehicle.framework.ChannelListener;
+import com.mysirui.vehicle.framework.IBleMsgCoder;
 import com.mysirui.vehicle.framework.RawChannel;
+import com.mysirui.vehicle.util.BleUtil;
+import com.mysirui.vehicle.util.EnvUtil;
 import com.mysirui.vehicle.util.LogUtil;
 import com.mysirui.vehicle.util.RxUtil;
+import com.mysirui.vehicle.util.ScanUtil;
 import com.mysirui.vehicle.util.StringUtil;
 
 import java.util.HashMap;

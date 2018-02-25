@@ -60,7 +60,7 @@ public abstract class ScanUtil {
 
     protected void handle(BluetoothDevice device) {
         Log.d(TAG, "扫描到" + device.getName() + "=" + device);
-        if (StringUtil.isNoneEmpty(device.getName()) && device.getName().toUpperCase().endsWith(mMac)) {
+        if (StringUtil.isNoneEmpty(device.getName()) && device.getName().trim().toUpperCase().endsWith(mMac)) {
             deviceMap.put(mMac, device);
             finish(device);
         }

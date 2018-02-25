@@ -6,10 +6,17 @@ import java.util.UUID;
 public class SRGattAttributes {
 	private static HashMap<String, String> attributes = new HashMap<String, String>();
 
+	//原来的协议
+//    public final static String SERVICE 					= "0000fff0-0000-1000-8000-00805f9b34fb";
+//    public final static String BLE_WRITE_DATA 			= "0000fff3-0000-1000-8000-00805f9b34fb";
+//    public final static String TERMINAL_WRITE_DATA 		= "0000fff5-0000-1000-8000-00805f9b34fb";
+//    public final static String READ_DATA 				= "0000fff6-0000-1000-8000-00805f9b34fb";
+//    public final static String NOTIFICATION_DESCRIPTOR = "00002902-0000-1000-8000-00805f9b34fb";
+
 	public final static String SERVICE 					= "0000fff0-0000-1000-8000-00805f9b34fb";
-	public final static String BLE_WRITE_DATA 			= "0000fff3-0000-1000-8000-00805f9b34fb";
-	public final static String TERMINAL_WRITE_DATA 		= "0000fff5-0000-1000-8000-00805f9b34fb";
-	public final static String READ_DATA 				= "0000fff6-0000-1000-8000-00805f9b34fb";
+	public final static String BLE_WRITE_DATA 			= "0000fff4-0000-1000-8000-00805f9b34fb";
+	public final static String TERMINAL_WRITE_DATA 		= "0000fff4-0000-1000-8000-00805f9b34fb";
+	public final static String READ_DATA 				= "0000fff5-0000-1000-8000-00805f9b34fb";
 	public final static String NOTIFICATION_DESCRIPTOR = "00002902-0000-1000-8000-00805f9b34fb";
 
 
