@@ -6,6 +6,7 @@ import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.mysirui.vehicle.util.BleUtil;
@@ -23,24 +24,28 @@ import rx.Subscriber;
 public class HighApiLeScanUtil extends ScanUtil {
 
     protected void startScan(String mac) {
-        String MAC;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < mac.length(); i++) {
-            sb.append(mac.charAt(i));
-            if ((i + 1) % 2 == 0) {//i+1  为 2,4,6,8 偶数
-                if (i + 1 < mac.length()) {
-                    sb.append(":");
+        if (!TextUtils.isEmpty(mac)) {
+            mac = mac.trim();
+            String MAC;
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < mac.length(); i++) {
+                sb.append(mac.charAt(i));
+                if ((i + 1) % 2 == 0) {//i+1  为 2,4,6,8 偶数
+                    if (i + 1 < mac.length()) {
+                        sb.append(":");
+                    }
                 }
             }
+            MAC = sb.toString().toUpperCase();
+            List<ScanFilter> bleScanFilters = new ArrayList<>();
+            bleScanFilters.add(
+                    new ScanFilter.Builder().setDeviceAddress(MAC).build()//setServiceUuid(new ParcelUuid(SRGattAttributes.UUID_SERVICE)
+            );
+            ScanSettings bleScanSettings = new ScanSettings.Builder().build();
+            BleUtil.getInstance().getmBluetoothLeScanner().startScan(bleScanFilters, bleScanSettings, scanCallback);//bleScanFilters, bleScanSettings,
+        } else {
+            BleUtil.getInstance().getmBluetoothLeScanner().startScan(scanCallback);
         }
-        MAC = sb.toString().toUpperCase();
-        List<ScanFilter> bleScanFilters = new ArrayList<>();
-        bleScanFilters.add(
-                new ScanFilter.Builder().setDeviceAddress(MAC).build()//setServiceUuid(new ParcelUuid(SRGattAttributes.UUID_SERVICE)
-        );
-        ScanSettings bleScanSettings = new ScanSettings.Builder().build();
-        BleUtil.getInstance().getmBluetoothLeScanner().startScan(bleScanFilters, bleScanSettings, scanCallback);//bleScanFilters, bleScanSettings,
-
     }
 
     @Override
@@ -57,7 +62,9 @@ public class HighApiLeScanUtil extends ScanUtil {
         return Observable.create(new Observable.OnSubscribe<BluetoothDevice>() {
             @Override
             public void call(Subscriber<? super BluetoothDevice> subscriber) {
-                mMac = mac.replaceAll(":", "").toUpperCase();
+                if (!TextUtils.isEmpty(mac)) {
+                    mMac = mac.trim().replaceAll(":", "").toUpperCase();
+                }
                 mSub = subscriber;
                 Log.i("是否打开蓝牙", "" + BleUtil.getInstance().isBleEnabled());
                 startScan(mac);
@@ -65,7 +72,8 @@ public class HighApiLeScanUtil extends ScanUtil {
             }
         });
     }
-    ScanCallback  scanCallback = new ScanCallback() {
+
+    ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
