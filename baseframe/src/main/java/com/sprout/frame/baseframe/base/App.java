@@ -1,9 +1,10 @@
 package com.sprout.frame.baseframe.base;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 
 import com.sprout.frame.baseframe.utils.AndroidUtil;
@@ -31,7 +32,7 @@ import okhttp3.OkHttpClient;
 /**
  * Create by Sprout at 2017/8/15
  */
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     private static Context context = null;
 
@@ -42,6 +43,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         context = this;
         initBugly();
         iniOKHttpClient(this);

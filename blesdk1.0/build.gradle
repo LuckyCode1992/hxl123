@@ -9,7 +9,7 @@ android {
     //   -- 收到主机滚动码后同步到otu
     //   -- 上锁解锁指令同步到otu
     defaultConfig {
-        minSdkVersion 18
+        minSdkVersion 19
         targetSdkVersion 22
         versionCode 2
         versionName "1.1"

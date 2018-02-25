@@ -9,8 +9,23 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
 
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <!--6.0版本以上的蓝牙权限需要模糊定位权限，仅作用于6.0+-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
-        android:name=".base.App"
         android:allowBackup="true"
         android:supportsRtl="true">
     </application>

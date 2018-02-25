@@ -13,16 +13,9 @@ import android.widget.TextView;
 import com.mysirui.vehicle.SRBleSDK;
 import com.sprout.frame.baseframe.utils.coder.AES;
 
-import org.bouncycastle.util.encoders.Hex;
-
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends UIBaseActivity {
 
@@ -73,42 +66,42 @@ public class MainActivity extends UIBaseActivity {
                     }
                 });
 
-        Observable.interval(3, TimeUnit.SECONDS)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(Schedulers.newThread())
-                .subscribe(new Subscriber<Long>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(Long aLong) {
-                        // 加密字符串
-                        Log.d("--------", "加密前的：" + content);
-                        Log.d("--------", "加密密钥：" + key);
-                        // 加密方法
-                        byte[] enc = aes.encrypt(content.getBytes(), key.getBytes());
-                        Log.d("--------", "加密后的内容：" + new String(Hex.encode(enc)));
-                        aes.iv1 = new String(Hex.encode(enc));
-//                        // 解密方法
-//                        byte[] dec = aes.decrypt(enc, key.getBytes());
-//                        System.out.println("解密后的内容：" + new String(dec));
-
-                    }
-                });
+//        Observable.interval(3, TimeUnit.SECONDS)
+//                .subscribeOn(Schedulers.newThread())
+//                .observeOn(Schedulers.newThread())
+//                .subscribe(new Subscriber<Long>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(Long aLong) {
+//                        // 加密字符串
+//                        Log.d("--------", "加密前的：" + content);
+//                        Log.d("--------", "加密密钥：" + key);
+//                        // 加密方法
+//                        byte[] enc = aes.encrypt(content.getBytes(), key.getBytes());
+//                        Log.d("--------", "加密后的内容：" + new String(Hex.encode(enc)));
+//                        aes.iv1 = new String(Hex.encode(enc));
+////                        // 解密方法
+////                        byte[] dec = aes.decrypt(enc, key.getBytes());
+////                        System.out.println("解密后的内容：" + new String(dec));
+//
+//                    }
+//                });
     }
 
     @OnClick({R.id.btn_connect, R.id.btn_send,R.id.btn_lottie})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_connect:
-//                bleSDK.start()
+                bleSDK.start("TDCM-LDFZ","","");
                 break;
             case R.id.btn_send:
 //                bleSDK.
