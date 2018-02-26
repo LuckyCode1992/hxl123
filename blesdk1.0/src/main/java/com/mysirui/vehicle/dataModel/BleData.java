@@ -35,6 +35,9 @@ public class BleData {
 	private int operationType;
 	private String operationParamenter;
 
+	public BleData() {
+	}
+
 	public BleData(int terminal, int message, int operation, String paramenter) {
 		this.terminalType = terminal;
 		this.messageType = message;

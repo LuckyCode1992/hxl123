@@ -75,12 +75,11 @@ public class BleRawClient<T> extends RawChannel<T> {
 
         changeStateTo(STATE_CONNTCTING);
         if(StringUtil.isEmpty(mac) || !BleUtil.getInstance().isBleEnabled()){
-            LogUtil.ble("断开原因"+"mac为null");
+            LogUtil.ble("断开原因"+"mac="+mac+"bleIsEnable"+BleUtil.getInstance().isBleEnabled());
             changeStateTo(STATE_DISCONNTCTED);
             return false;
         }
-
-
+        LogUtil.ble("开始扫描");
         scanUtil.scan(EnvUtil.getApplication(),mac,SRBleSDK.time).subscribe(new Action1<BluetoothDevice>() {
             @Override
             public void call(final BluetoothDevice device) {
@@ -96,7 +95,7 @@ public class BleRawClient<T> extends RawChannel<T> {
                             });
                             LogUtil.ble("开始连接"+device+Thread.currentThread());
                         }else {
-                            LogUtil.ble("断开原因"+"scanUtil");
+                            LogUtil.ble("断开原因"+"scanUtil:"+"device="+device+"-shouldConn="+shouldConn);
                             changeStateTo(STATE_DISCONNTCTED);
                         }
                     }
