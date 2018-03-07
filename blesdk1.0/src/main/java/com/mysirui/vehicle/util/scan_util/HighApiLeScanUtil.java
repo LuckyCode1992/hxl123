@@ -24,7 +24,7 @@ import rx.Subscriber;
 public class HighApiLeScanUtil extends ScanUtil {
 
     protected void startScan(String mac) {
-        if (!TextUtils.isEmpty(mac)) {
+        if (false) {//这里加判断，如果不是空，就直接执行下面的内容
             mac = mac.trim();
             String MAC;
             StringBuilder sb = new StringBuilder();

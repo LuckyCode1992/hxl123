@@ -3,8 +3,7 @@ package com.sprout.frame.baseframe.base;
 import android.app.Activity;
 import android.text.TextUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 /**
  * Create by Sprout at 2017/8/15
@@ -12,7 +11,7 @@ import java.util.List;
 public class ManagerActivity {
 
     private static ManagerActivity instance = new ManagerActivity();
-    private List<Activity> mLists = new ArrayList<>();
+    private Stack<Activity> mLists = new Stack<>();
 
     private ManagerActivity() {
     }

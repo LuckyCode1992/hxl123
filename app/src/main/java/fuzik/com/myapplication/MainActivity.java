@@ -3,6 +3,7 @@ package fuzik.com.myapplication;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -17,12 +18,14 @@ import org.bouncycastle.util.encoders.Hex;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends UIBaseActivity {
 
@@ -44,10 +47,18 @@ public class MainActivity extends UIBaseActivity {
     @BindView(R.id.tv_jiesou)
     TextView tvJiesou;
 
+    Handler handler;
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+    }
+
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_main);
+        handler = new Handler();
         aes = new AES();
         //   加解密 密钥
         key = "LD-FZ-1707200004";
@@ -58,98 +69,85 @@ public class MainActivity extends UIBaseActivity {
                 .onConnect(new Action0() {
                     @Override
                     public void call() {
-                        tvBle.setText("连接");
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvBle.setText("连接");
+                            }
+                        });
                     }
                 })
                 .onLogin(new Action0() {
                     @Override
                     public void call() {
-                        tvBle.setText("登陆");
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvBle.setText("登陆");
+                            }
+                        });
                     }
                 })
                 .onDisconn(new Action0() {
                     @Override
                     public void call() {
-                        tvBle.setText("未连接");
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvBle.setText("未连接");
+                            }
+                        });
                     }
                 })
                 .onMessage(new Action1<String>() {
                     @Override
-                    public void call(String s) {
-                        tvJiesou.setText(s);
+                    public void call(final String s) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                tvJiesou.setText(s);
+                            }
+                        });
                     }
                 });
 
-//        Observable.interval(3, TimeUnit.SECONDS)
-//                .subscribeOn(Schedulers.newThread())
-//                .observeOn(Schedulers.newThread())
-//                .subscribe(new Subscriber<Long>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onNext(Long aLong) {
-//                        // 加密字符串
-//                        Log.d("--------", "加密前的：" + content);
-//                        Log.d("--------", "加密密钥：" + key);
-//                        // 加密方法
-//                        byte[] enc = aes.encrypt(content.getBytes(), key.getBytes());
-//                        Log.d("--------", "加密后的内容：" + new String(Hex.encode(enc)));
-//                        aes.iv1 = new String(Hex.encode(enc));
-////                        // 解密方法
-////                        byte[] dec = aes.decrypt(enc, key.getBytes());
-////                        System.out.println("解密后的内容：" + new String(dec));
-//
-//                    }
-//                });
     }
 
-    @OnClick({R.id.btn_connect, R.id.btn_send, R.id.btn_lottie})
+    @OnClick({R.id.btn_connect, R.id.btn_send, R.id.btn_lottie, R.id.btn_fragment})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_connect:
                 bleSDK.start("TDCM-LDFZ", "", "");
                 break;
             case R.id.btn_send:
-                bleSDK.sendMsg(content);
-                Observable.create(new Observable.OnSubscribe<Object>() {
+                Observable.create(new ObservableOnSubscribe<String>() {
                     @Override
-                    public void call(Subscriber<? super Object> subscriber) {
-
+                    public void subscribe(ObservableEmitter<String> e) throws Exception {
+                        byte[] enc = aes.encrypt(content.getBytes(), key.getBytes());
+                        byte[] encode = Hex.encode(enc);
+                        Log.d("--------", "enc：" + new String(enc));
+                        Log.d("--------", "encode：" + new String(encode));
+                        String str = new String(encode);
+                        Log.d("--------", "加密后的内容：" + str);
+                        // aes.iv1 = str;
+                        bleSDK.sendMsg(str);
+                        e.onNext(str);
                     }
                 }).subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<Object>() {
+                        .subscribe(new Consumer<String>() {
                             @Override
-                            public void onCompleted() {
-
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-
-                            @Override
-                            public void onNext(Object o) {
-
+                            public void accept(String o) throws Exception {
+                                tvJiamiHou.setText(o);
                             }
                         });
-                byte[] enc = aes.encrypt(content.getBytes(), key.getBytes());
-                Log.d("--------", "加密后的内容：" + new String(Hex.encode(enc)));
-                aes.iv1 = new String(Hex.encode(enc));
-
                 break;
             case R.id.btn_lottie:
                 Log.d("点击测试", "lottie");
                 startActivity(new Intent(MainActivity.this, LottieActivity.class));
+                break;
+            case R.id.btn_fragment:
+                startActivity(new Intent(MainActivity.this, FragmentActivity.class));
                 break;
         }
     }

@@ -5,31 +5,35 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
-    <!--6.0版本以上的蓝牙权限需要模糊定位权限，仅作用于6.0+-->
+    <!-- 6.0版本以上的蓝牙权限需要模糊定位权限，仅作用于6.0+ -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
+    <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 蓝牙分享所需的权限 -->
-    　<uses-feature
-    android:name="android.bluetooth.le"
-    android:required="true" />
+
+
+    　
+
+
+    <uses-feature
+        android:name="android.bluetooth.le"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
     <application
         android:name=".Myapp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +41,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LottieActivity"/>
+        <activity android:name=".LottieActivity" />
+        <activity android:name=".FragmentActivity" />
+        <activity android:name=".fragment_activity_demo.ScollableFragmentActivity" />
+        <activity android:name=".fragment_activity_demo.FixedFragmentActivity" />
+        <activity android:name=".fragment_activity_demo.DynamicActivity" />
+        <activity android:name=".fragment_activity_demo.OnlyIndicatorActivity" />
+        <activity android:name=".fragment_activity_demo.BageFragmentActivity" />
+        <activity android:name=".fragment_activity_demo.ContainerFragmentActivity" />
+        <activity android:name=".fragment_activity_demo.CustomLayoutActivity" />
+        <activity android:name=".fragment_activity_demo.CustomNavigatorActivity"></activity>
     </application>
 
 </manifest>

@@ -71,9 +71,21 @@ public class AES {
         init(keyBytes);
         Log.d("--------","IV：" + iv1);
         try {
-            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv1.getBytes()));
+
+            int base = 16;
+            byte[] bytes = iv1.getBytes();
+            if (bytes.length % base != 0) {
+                int groups = bytes.length / base + (bytes.length % base != 0 ? 1 : 0);
+                byte[] temp = new byte[groups * base];
+                Arrays.fill(temp, (byte) 0x07);
+                System.arraycopy(bytes, 0, temp, 0, bytes.length);
+                bytes = temp;
+            }
+
+            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(bytes));
             encryptedText = cipher.doFinal(content);
         } catch (Exception e) {
+            Log.d("--------","Exception：" + e.getMessage());
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
