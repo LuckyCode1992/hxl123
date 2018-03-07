@@ -14,6 +14,8 @@ import fuzik.com.myapplication.fragment_activity_demo.CustomLayoutActivity;
 import fuzik.com.myapplication.fragment_activity_demo.CustomNavigatorActivity;
 import fuzik.com.myapplication.fragment_activity_demo.DynamicActivity;
 import fuzik.com.myapplication.fragment_activity_demo.FixedFragmentActivity;
+import fuzik.com.myapplication.fragment_activity_demo.FragmentAndViewPagerActivity;
+import fuzik.com.myapplication.fragment_activity_demo.FragmentDemoActivity;
 import fuzik.com.myapplication.fragment_activity_demo.OnlyIndicatorActivity;
 import fuzik.com.myapplication.fragment_activity_demo.ScollableFragmentActivity;
 
@@ -24,9 +26,16 @@ public class FragmentActivity extends UIBaseActivity {
         super.onCreate(savedInstanceState, R.layout.activity_fragment);
     }
 
-    @OnClick({R.id.btn_scrollable_tab, R.id.btn_fixed_tab, R.id.btn_dynamic_tab, R.id.btn_no_tab_only_indicator, R.id.btn_tab_with_badge_view, R.id.btn_work_with_fragment_container, R.id.btn_load_custom_layout, R.id.btn_custom_navigator})
+    @OnClick({R.id.btn_fragment,R.id.btn_fragment_viewpager,R.id.btn_scrollable_tab, R.id.btn_fixed_tab, R.id.btn_dynamic_tab, R.id.btn_no_tab_only_indicator, R.id.btn_tab_with_badge_view, R.id.btn_work_with_fragment_container, R.id.btn_load_custom_layout, R.id.btn_custom_navigator})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.btn_fragment:
+                skip(FragmentDemoActivity.class);
+                break;
+            case R.id.btn_fragment_viewpager:
+                skip(FragmentAndViewPagerActivity.class);
+                break;
+
             case R.id.btn_scrollable_tab:
                 skip(ScollableFragmentActivity.class);
                 break;

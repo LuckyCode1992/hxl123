@@ -50,7 +50,9 @@
         <activity android:name=".fragment_activity_demo.BageFragmentActivity" />
         <activity android:name=".fragment_activity_demo.ContainerFragmentActivity" />
         <activity android:name=".fragment_activity_demo.CustomLayoutActivity" />
-        <activity android:name=".fragment_activity_demo.CustomNavigatorActivity"></activity>
+        <activity android:name=".fragment_activity_demo.CustomNavigatorActivity" />
+        <activity android:name=".fragment_activity_demo.FragmentDemoActivity" />
+        <activity android:name=".fragment_activity_demo.FragmentAndViewPagerActivity"></activity>
     </application>
 
 </manifest>
