@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="fuzik.com.myapplication.fragment_activity_demo.FragmentDemoActivity">
 
     <FrameLayout
@@ -19,6 +20,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
     <RadioButton
+        android:id="@+id/radio1"
         android:text="第一个"
         android:button="@null"
         android:width="0dp"
@@ -28,7 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
         <RadioButton
-            android:text="第一个"
+            android:id="@+id/radio2"
+            android:text="第二个"
             android:button="@null"
             android:width="0dp"
             android:gravity="center"
@@ -37,7 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
-            android:text="第一个"
+            android:id="@+id/radio3"
+            android:text="第三个"
             android:button="@null"
             android:width="0dp"
             android:textColor="@drawable/radio_selector"
