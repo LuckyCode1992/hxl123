@@ -20,25 +20,27 @@
         android:orientation="horizontal">
     <RadioButton
         android:text="第一个"
-        android:button="null"
+        android:button="@null"
         android:width="0dp"
         android:gravity="center"
+        android:textColor="@drawable/radio_selector"
         android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
         <RadioButton
             android:text="第一个"
-            android:button="null"
+            android:button="@null"
             android:width="0dp"
             android:gravity="center"
+            android:textColor="@drawable/radio_selector"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
             android:text="第一个"
-            android:button="null"
+            android:button="@null"
             android:width="0dp"
-            android:textColor="@drawable/progress_circle_bg"
+            android:textColor="@drawable/radio_selector"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"

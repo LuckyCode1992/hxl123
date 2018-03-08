@@ -46,7 +46,7 @@
 
             <Button
                 android:id="@+id/btn_tab_with_badge_view"
-                android:text="不滑动，仅点击"
+                android:text="滑动+红点点击"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
