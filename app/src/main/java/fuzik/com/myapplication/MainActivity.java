@@ -113,7 +113,7 @@ public class MainActivity extends UIBaseActivity {
 
     }
 
-    @OnClick({R.id.btn_connect, R.id.btn_send, R.id.btn_lottie, R.id.btn_fragment})
+    @OnClick({R.id.btn_connect, R.id.btn_send, R.id.btn_lottie, R.id.btn_fragment,R.id.btn_recycleview})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_connect:
@@ -148,6 +148,9 @@ public class MainActivity extends UIBaseActivity {
                 break;
             case R.id.btn_fragment:
                 startActivity(new Intent(MainActivity.this, FragmentActivity.class));
+                break;
+            case R.id.btn_recycleview:
+                startActivity(new Intent(MainActivity.this, RecycleViewActivity.class));
                 break;
         }
     }

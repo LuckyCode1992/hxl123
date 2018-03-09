@@ -34,4 +34,8 @@ dependencies {
     compile 'com.airbnb.android:lottie:2.1.0'
     compile 'com.jakewharton:butterknife:8.3.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.3.0'
+
+    //recycleview
+    compile 'com.android.support:appcompat-v7:27.0.0'
+    compile 'com.android.support:recyclerview-v7:27.0.0'
 }

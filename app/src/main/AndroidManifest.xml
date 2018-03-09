@@ -52,7 +52,15 @@
         <activity android:name=".fragment_activity_demo.CustomLayoutActivity" />
         <activity android:name=".fragment_activity_demo.CustomNavigatorActivity" />
         <activity android:name=".fragment_activity_demo.FragmentDemoActivity" />
-        <activity android:name=".fragment_activity_demo.FragmentAndViewPagerActivity"></activity>
+        <activity android:name=".fragment_activity_demo.FragmentAndViewPagerActivity" />
+        <activity android:name=".RecycleViewActivity" />
+        <activity android:name=".recycleview_demo.normal.NorRecycleviewActivity" />
+        <activity android:name=".recycleview_demo.FanLayoutManagerActivity" />
+        <activity android:name=".recycleview_demo.CarouselLayoutManagerActivity" />
+        <activity android:name=".recycleview_demo.ChipsLayoutManagerActivity" />
+        <activity android:name=".recycleview_demo.HiveLayoutManagerActivity" />
+        <activity android:name=".recycleview_demo.VlayoutActivity" />
+        <activity android:name=".recycleview_demo.LondonEyeLayoutManagerActivity"></activity>
     </application>
 
 </manifest>
