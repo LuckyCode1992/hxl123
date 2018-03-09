@@ -2,6 +2,7 @@ package fuzik.com.myapplication.recycleview_demo.normal;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -36,8 +37,10 @@ public class NorRecycleviewActivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL); //加上这句 就可以设置方向
         recycleviewNor.setLayoutManager(layoutManager);
 
+        //添加Android自带的分割线
+        recycleviewNor.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         //添加数据
-        norAdapter = new NorAdapter(list);
+        norAdapter = new NorAdapter(list,this);
         //加入adapter
         recycleviewNor.setAdapter(norAdapter);
 
