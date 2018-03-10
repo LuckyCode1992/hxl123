@@ -16,4 +16,10 @@
     <color name="portland_orange">#fc5f23</color>
     <color name="usc_gold">#fec804</color>
     <color name="white">#ffffff</color>
+
+    <!--hivelayoutmanager-->
+    <color name="mint_cream">#F5FFFA</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="orange">#FF8C00</color>
+    <color name="red">#FF0000</color>
 </resources>
