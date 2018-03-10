@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context="fuzik.com.myapplication.recycleview_demo.ChipsLayoutManagerActivity">
 
+    <TextView
+        android:text="暂时不写，内容太多，用处太少"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>

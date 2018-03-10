@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import fuzik.com.myapplication.R;
 
+/**
+ * 暂时不做这个
+ */
 public class ChipsLayoutManagerActivity extends AppCompatActivity {
 
     @Override
