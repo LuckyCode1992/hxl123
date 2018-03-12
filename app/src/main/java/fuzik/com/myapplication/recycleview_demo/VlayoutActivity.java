@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import fuzik.com.myapplication.R;
+import fuzik.com.myapplication.recycleview_demo.vlayoutmanager.OnePlusNLayoutActivity;
 import fuzik.com.myapplication.recycleview_demo.vlayoutmanager.VLayoutActivity;
 
 public class VlayoutActivity extends ListActivity {
@@ -25,7 +26,7 @@ public class VlayoutActivity extends ListActivity {
                 VLayoutActivity.class.getSimpleName(),
                 OnePlusNLayoutActivity.class.getSimpleName()
         };
-       setListAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, mTitles));
+       setListAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_2, mTitles));
     }
 
     @Override
