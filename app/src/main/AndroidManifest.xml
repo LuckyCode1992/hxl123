@@ -60,7 +60,9 @@
         <activity android:name=".recycleview_demo.ChipsLayoutManagerActivity" />
         <activity android:name=".recycleview_demo.HiveLayoutManagerActivity" />
         <activity android:name=".recycleview_demo.VlayoutActivity" />
-        <activity android:name=".recycleview_demo.LondonEyeLayoutManagerActivity"></activity>
+        <activity android:name=".recycleview_demo.LondonEyeLayoutManagerActivity" />
+        <activity android:name=".recycleview_demo.vlayoutmanager.VLayoutActivity" />
+        <activity android:name=".recycleview_demo.vlayoutmanager.OnePlusNLayoutActivity"></activity>
     </application>
 
 </manifest>
