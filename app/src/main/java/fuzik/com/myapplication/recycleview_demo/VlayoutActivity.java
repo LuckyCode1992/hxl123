@@ -26,7 +26,7 @@ public class VlayoutActivity extends ListActivity {
                 VLayoutActivity.class.getSimpleName(),
                 OnePlusNLayoutActivity.class.getSimpleName()
         };
-       setListAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_2, mTitles));
+       setListAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, mTitles));
     }
 
     @Override

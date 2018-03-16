@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import com.sprout.frame.baseframe.utils.AndroidUtil;
 import com.sprout.frame.baseframe.utils.LogUtil;
 import com.sprout.frame.baseframe.utils.NetUtil;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
@@ -43,6 +44,15 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //内存泄漏检查工具
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
+
         MultiDex.install(this);
         context = this;
         initBugly();

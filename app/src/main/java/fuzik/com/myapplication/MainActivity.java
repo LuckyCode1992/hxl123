@@ -110,6 +110,15 @@ public class MainActivity extends UIBaseActivity {
                         });
                     }
                 });
+//        List<Bitmap> list = new ArrayList();
+//        //制造内存溢出
+//        while (true){
+//            list.add(BitmapFactory.decodeResource(getResources(), com.sprout.frame.baseframe.R.mipmap.loading));
+//        }
+
+
+
+
 
     }
 
